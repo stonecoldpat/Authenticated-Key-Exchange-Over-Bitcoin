@@ -1399,7 +1399,7 @@ Value zkptest (const Array& params, bool fHelp) {
     alice_zkp = getyakzkp("2dac21b624821f6a0c41ec030ed5b03a10e4bb9df2627d16f84dbe364b709647", "0", "348abac7317f5afb8af32c54d3504c53cc973948322cb5be301e8ca47bc8de85", "0", 1);
     bob_zkp = getyakzkp("348abac7317f5afb8af32c54d3504c53cc973948322cb5be301e8ca47bc8de85", "0", "2dac21b624821f6a0c41ec030ed5b03a10e4bb9df2627d16f84dbe364b709647", "0", 0);
     
-    /* Expecting to be returned:
+    /* Array returned by getyakzkp...
     * [0] = g^w
     * [1] = g^v
     * [2] = s
@@ -1407,8 +1407,10 @@ Value zkptest (const Array& params, bool fHelp) {
     * [4] = w
     * [5] = partners compressed key
     * [6] = x co-ordinate from sig
-    *
     */
+    
+    // Use Bob's g^w, g^v, s, and his transaction ID. 
+    // Use Alice's secret random nonce 'k', 'w'.
     return getyaksecret(bob_zkp[0], bob_zkp[1], alice_zkp[5], bob_zkp[2], alice_zkp[3], alice_zkp[4], "348abac7317f5afb8af32c54d3504c53cc973948322cb5be301e8ca47bc8de85", bob_zkp[6]);
 }
 
